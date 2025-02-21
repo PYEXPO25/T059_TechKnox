@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Bus Tracker - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='Transport.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            position: relative;
+            padding-top: 60px; /* Prevents content from hiding under the fixed header */
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            background: #004aad;
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            z-index: 1000;
+        }
+        .header-logo {
+            height: 30px; /* Adjust the size of the logo */
+            width: auto;
+            margin-left: 15px; /* Adds spacing from the left */
+        }
+
+
+        /* About Button Styling (inside header) */
+        .header {
+        width: 100%;
+        background: linear-gradient(45deg, #004aad, #0077ff, #00c3ff);
+        color: white;
+        padding: 15px 20px;
+        font-size: 22px;
+        font-weight: bold;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        animation: header-glow 3s infinite alternate;
+    }
+
+    @keyframes header-glow {
+        0% {
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        100% {
+            box-shadow: 0px 4px 15px rgba(0, 255, 255, 0.5);
+        }
+    }
+
+    .header-logo {
+        height: 40px;
+        margin-left: 15px;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+    }
+
+    .header span {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.7);
+    }
+
+    /* Enhanced About Button */
+    .about-btn {
+        background: #ffcc00;
+        color: #004aad;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 15px;
+        box-shadow: 2px 2px 10px rgba(255, 204, 0, 0.5);
+    }
+
+    .about-btn:hover {
+        background: #ffd633;
+        box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5);
+        transform: scale(1.05);
+    }
+
+        .about-btn:hover {
+            background: #ddd;
+        }
+
+        .container {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.8); /* Adjust the last value (0.8) for transparency */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .container h2 {
+            margin-bottom: 15px;
+            color: #004aad;
+        }
+        .bus-icon img {
+            width: 150px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #004aad;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #002f6c;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer inside the login box */
+        .login-footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: gray;
+        }
+
+        /* Global Footer Styling */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with About Button -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='kgbus.png') }}" alt="Bus Logo" class="header-logo">
+        <span>KG-ROUTES</span>
+        <a href="{{ url_for('about') }}" class="about-btn">About</a>
+    </div>
+    
+
+    <!-- Login Box -->
+    <div class="container">
+        <div class="bus-icon">
+            <img src="{{ url_for('static', filename='kgbus.png') }}" alt="KG Routes Logo">
+        </div>
+
+        <h2>College Bus Tracker</h2>
+        
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        <form method="POST">
+            <input type="text" name="username" placeholder="Enter Username" required><br>
+            <input type="password" name="password" placeholder="Enter Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Footer inside the login box -->
+        <p class="login-footer">🚍 Track your college bus in real-time!</p>
+    </div>
+
+    <!-- Global Footer at the bottom -->
+    <footer class="footer">
+        <p>&copy; 2025 College Bus Tracker. All rights reserved by Tech Knox.</p>
+    </footer>
+
+</body>
+</html>

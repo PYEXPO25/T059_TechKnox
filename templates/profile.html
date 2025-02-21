@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | College Bus Tracking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url("{{ url_for('static', filename='bus.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            width: 450px; /* Increased width */
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;  /* Increased size */
+            height: auto;  /* Maintain aspect ratio */
+            border: 1px solid #004aad; /* Keep the border */
+            object-fit: contain;  /* Ensure the full image is visible */
+        }
+
+
+        h2 {
+            color: #004aad;
+            margin-top: 10px;
+            font-size: 24px; /* Slightly larger font */
+        }
+
+        .info {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .info p {
+            margin: 10px 0;
+            font-size: 18px; /* Increased font size */
+            color: #333;
+        }
+
+        .edit-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #0077ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+        }
+
+        .edit-btn:hover {
+            background: #005bb5;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #d9534f;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='profile.jpg') }}" class="profile-img" alt="Profile Picture">
+        <h2>Santhosh</h2>
+        
+        <div class="info">
+            <p><strong>📧 Email:</strong> {{ email }}</p>
+            <p><strong>📍 Location:</strong> {{ location }}</p>
+            <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
+        </div>
+
+        <a href="#" class="edit-btn">Edit Profile</a>
+        <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

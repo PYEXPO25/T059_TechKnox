@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - College Bus Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: #004aad;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #002f6c;
+        }
+
+        /* Align the list to the left */
+        .left-align {
+            text-align: left;
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Instagram button */
+        .insta-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #E1306C; /* Instagram color */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .insta-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .insta-btn:hover {
+            background: #C13584;
+        }
+    </style>
+</head>
+<body>
+    <h1>About KG-ROUTES College Bus Tracker</h1>
+    <p>This web application provides real-time tracking of college buses to enhance convenience, punctuality, safety, and efficiency for students and staff.</p>
+
+    <div class="left-align">
+        <h2>Info</h2>
+        <p>This Kg-Routes College Bus Live Location Tracking website is developed by <strong>Tech Knox</strong>.</p>
+        
+        <h2>Contact Details</h2>
+        <p><strong>Phone:</strong> 9600944550</p>
+        <p><strong>Email:</strong> techknox@gmail.com</p>
+    </div>
+
+    <!-- Instagram Button -->
+    <a href="https://www.instagram.com/tech_.knox/" target="_blank" class="insta-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+        Follow us on Instagram
+    </a>
+
+    <br><br>
+
+    <a href="{{ url_for('login') }}" class="back-btn">Back to Login</a>
+</body>
+</html>
