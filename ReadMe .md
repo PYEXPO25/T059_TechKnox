@@ -1,4 +1,4 @@
-                                College Bus Tracking
+College Bus Tracking
 
 Problem statement :  
 The project aims to create a web application for real-time tracking of college buses to enhance convenience, punctuality, safety, and efficiency for students and staff.
