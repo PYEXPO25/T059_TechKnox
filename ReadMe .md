@@ -94,5 +94,5 @@ https://drive.google.com/drive/folders/1bdBAGTNtmyMk-1ENNH-kQNvQrncUdogG?usp=dri
 
 ---
 
-🚀 **Developed with ❤️ by [Your Name]**
+🚀 **Developed with ❤️ by [Team Tech_Knox]**
 
