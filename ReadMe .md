@@ -16,25 +16,30 @@ This project is a **live location tracking system for college buses**, utilizing
 
 ## 📂 Project Structure
 ```
-📁 college-bus-tracker
-│── 📂 backend            # Flask backend
-│   │── app.py           # Main Flask application
-│   │── requirements.txt # Dependencies
-│   │── config.py        # Configuration settings
-│   └── ...
+📁 Project Root
+│── 📁 static                  # Stores static assets (images, CSS, JS, etc.)
+│   │── bus.jpg
+│   │── kg.png
+│   │── kgbus.png
+│   │── profile.jpg
+│   │── rot1.png
+│   │── rot2.png
+│   │── rot3.png
+│   │── Transport.jpg
+│   │── work.png
 │
-│── 📂 esp32_firmware     # ESP-32 firmware
-│   │── main.py          # Code to read GPS and send data
-│   └── ...
+│── 📁 templates copy          # Contains HTML templates for Flask rendering
+│   │── about.html
+│   │── dashboard.html
+│   │── login.html
+│   │── map.html
+│   │── message.html
+│   │── noti.html
+│   │── profile.html
+│   │── rot.html
+│   │── settings.html
 │
-│── 📂 frontend           # Web application
-│   │── index.html       # Main UI
-│   │── app.js          # Handles frontend logic
-│   │── styles.css      # Styling
-│   └── ...
-│
-│── README.md             # Project documentation
-└── LICENSE               # License file
+│── app.py                     # Main Flask application
 ```
 
 ## 🚀 Features
@@ -78,8 +83,14 @@ Simply open `index.html` in a browser or set up a local web server.
 - Database integration for route history
 - Mobile app version
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📽️DEMO VIDEO LINK
+https://drive.google.com/file/d/1KphNVTlRHtROGWSbx2_u5CbFWyl_84Qy/view?usp=drive_link
+
+## PPT of our project
+https://drive.google.com/file/d/18w-PtlVfkhcwFeQie8jy_lfzKUvpPby8/view?usp=drive_link
+
+## over all folder of demo video and PPT
+https://drive.google.com/drive/folders/1bdBAGTNtmyMk-1ENNH-kQNvQrncUdogG?usp=drive_link
 
 ---
 
