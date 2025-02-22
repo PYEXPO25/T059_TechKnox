@@ -4,73 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realtime location tracker</title>
-
-    <!-- leaflet css  -->
+    <title>Realtime Location Tracker</title>
+    
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
+    
     <style>
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
         }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background: linear-gradient(45deg, #4d4b4b, #151414);
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #13244f, #27258e);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .sidebar a:hover { background: rgba(255, 255, 255, 0.2); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
+        .close-btn:hover { color: #ffcc00; }
 
         #map {
             width: 100%;
             height: 100vh;
+            position: relative;
+            top: 50px;
         }
     </style>
 </head>
 
 <body>
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
+        <a href="#">🏠 Home</a>
+        <a href="#">👤 Profile</a>
+        <a href="#">🗺️ Live Map</a>
+        <a href="#">🚌 Routes & Timings</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="#">❓ Help</a>
+        <a href="#">🚪 Logout</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <span class="menu-icon" onclick="toggleNav()">☰</span>
+        🚍 College Bus Tracker
+    </div>
+
+    <!-- Map Section -->
     <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        function toggleNav() {
+            let sidebar = document.getElementById("mySidebar");
+            sidebar.style.width = (sidebar.style.width === "250px") ? "0" : "250px";
+        }
+
+        // Initialize Map
+        var map = L.map('map').setView([14.0860746, 100.608406], 6);
+
+        // OSM Layer
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        if (!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!");
+        } else {
+            setInterval(() => {
+                navigator.geolocation.getCurrentPosition(getPosition);
+            }, 5000);
+        }
+
+        var marker, circle;
+
+        function getPosition(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            var accuracy = position.coords.accuracy;
+
+            if (marker) map.removeLayer(marker);
+            if (circle) map.removeLayer(circle);
+
+            marker = L.marker([lat, long]);
+            circle = L.circle([lat, long], { radius: accuracy });
+            var featureGroup = L.featureGroup([marker, circle]).addTo(map);
+            map.fitBounds(featureGroup.getBounds());
+            console.log(`Your coordinate is: Lat: ${lat}, Long: ${long}, Accuracy: ${accuracy}`);
+        }
+    </script>
 </body>
 </html>
-
-<!-- leaflet js  -->
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script>
-    // Map initialization 
-    var map = L.map('map').setView([14.0860746, 100.608406], 6);
-
-    //osm layer
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    osm.addTo(map);
-
-    if(!navigator.geolocation) {
-        console.log("Your browser doesn't support geolocation feature!")
-    } else {
-        setInterval(() => {
-            navigator.geolocation.getCurrentPosition(getPosition)
-        }, 5000);
-    }
-
-    var marker, circle;
-
-    function getPosition(position){
-        // console.log(position)
-        var lat = position.coords.latitude
-        var long = position.coords.longitude
-        var accuracy = position.coords.accuracy
-
-        if(marker) {
-            map.removeLayer(marker)
-        }
-
-        if(circle) {
-            map.removeLayer(circle)
-        }
-
-        marker = L.marker([lat, long])
-        circle = L.circle([lat, long], {radius: accuracy})
-
-        var featureGroup = L.featureGroup([marker, circle]).addTo(map)
-
-        map.fitBounds(featureGroup.getBounds())
-
-        console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
-    }
-
-</script>

@@ -12,22 +12,78 @@
             padding: 50px;
         }
 
+        .header {
+            width: 100%;
+            background: linear-gradient(45deg, #565252, #3d3838, #000000);
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #4d4b4b, #151414);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #1d1d1d;
+            transform: translateX(5px);
+        }
+
+        .sidebar a {
+            text-align: left;
+            padding-left: 20px; /* Align text to the left */
+        }
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .sidebar a:hover { background: rgba(255, 255, 255, 0.2); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
+        .close-btn:hover { color: #ffcc00; }
+
         .back-btn {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 15px;
-            background: #004aad;
+            background: #4d4b4b;
             color: white;
             text-decoration: none;
             border-radius: 6px;
             transition: 0.3s;
         }
+        .back-btn:hover { background: #000000; }
 
-        .back-btn:hover {
-            background: #002f6c;
-        }
-
-        /* Align the list to the left */
         .left-align {
             text-align: left;
             width: 60%;
@@ -38,11 +94,10 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Instagram button */
         .insta-btn {
             display: inline-flex;
             align-items: center;
-            background: #E1306C; /* Instagram color */
+            background: #E1306C;
             color: white;
             padding: 10px 20px;
             border-radius: 50px;
@@ -52,32 +107,44 @@
             transition: 0.3s;
             margin-top: 20px;
         }
-
         .insta-btn img {
             width: 20px;
             height: 20px;
             margin-right: 8px;
         }
-
-        .insta-btn:hover {
-            background: #C13584;
-        }
+        .insta-btn:hover { background: #C13584; }
     </style>
 </head>
 <body>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">&times;</a>
+        <a href="{{ url_for('dashboard') }}">🏠 Home</a>
+        <a href="{{ url_for('profile') }}">👤 Profile</a>
+        <a href="{{ url_for('map') }}">🗺️ Live Map</a>
+        <a href="#">🚌 Routes & Timings</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="#">❓ Help</a>
+        <a href="{{ url_for('about') }}" class="active">ℹ️About us</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+
+    <div class="header">
+        <span class="menu-icon" onclick="toggleNav()">☰</span>
+        🚍 KG-ROUTES
+    </div>
+
     <h1>About KG-ROUTES College Bus Tracker</h1>
     <p>This web application provides real-time tracking of college buses to enhance convenience, punctuality, safety, and efficiency for students and staff.</p>
 
     <div class="left-align">
         <h2>Info</h2>
-        <p>This Kg-Routes College Bus Live Location Tracking website is developed by <strong>Tech Knox</strong>.</p>
+        <p>This KG-ROUTES College Bus Live Location Tracking website is developed by <strong>Tech Knox</strong>.</p>
         
         <h2>Contact Details</h2>
         <p><strong>Phone:</strong> 9600944550</p>
         <p><strong>Email:</strong> techknox@gmail.com</p>
     </div>
 
-    <!-- Instagram Button -->
     <a href="https://www.instagram.com/tech_.knox/" target="_blank" class="insta-btn">
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
         Follow us on Instagram
@@ -86,5 +153,15 @@
     <br><br>
 
     <a href="{{ url_for('login') }}" class="back-btn">Back to Login</a>
+
+    <script>
+        function toggleNav() {
+            let sidebar = document.getElementById("mySidebar");
+            sidebar.style.width = (sidebar.style.width === "250px") ? "0" : "250px";
+        }
+    </script>
 </body>
 </html>
+
+
+

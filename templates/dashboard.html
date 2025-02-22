@@ -22,7 +22,7 @@
         /* Header */
         .header {
             width: 100%;
-            background: linear-gradient(to right, #004aad, #0077ff);
+            background: linear-gradient(45deg, #565252, #3d3838, #000000);
             color: white;
             padding: 15px;
             font-size: 22px;
@@ -46,33 +46,77 @@
         }
 
         /* Sidebar */
+        /* Sidebar Styles */
         .sidebar {
             height: 100%;
             width: 0;
             position: fixed;
             top: 0;
             left: 0;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: linear-gradient(45deg, #4d4b4b, #151414);
             overflow-x: hidden;
             transition: 0.4s;
             padding-top: 60px;
             box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
         }
 
+        /* Sidebar Links */
         .sidebar a {
-            padding: 12px 20px;
+            padding: 15px 25px;
             text-decoration: none;
             font-size: 18px;
             color: white;
             display: block;
             transition: 0.3s;
             border-left: 4px solid transparent;
+            font-weight: bold;
+            position: relative;
         }
 
+        /* Sidebar Hover Effect */
         .sidebar a:hover, .sidebar a.active {
-            background-color: #004aad;
-            border-left: 4px solid #ffcc00;
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #1d1d1d;
+            transform: translateX(5px);
         }
+
+        /* Sidebar Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #131211;
+        }
+
+        /* Sidebar Icons */
+        .sidebar a::before {
+            content: "•";
+            font-size: 22px;
+            color: #2d2d29;
+            position: absolute;
+            left: 10px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover::before {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Smooth Sidebar Opening */
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 250px; }
+        }
+
 
         .close-btn {
             position: absolute;
@@ -94,12 +138,12 @@
         }
 
         .container h2 {
-            color: #004aad;
+            color: #373838;
         }
 
         .bus-icon {
             font-size: 50px;
-            color: #ffcc00;
+            color: #252524;
         }
 
         .tracking-section {
@@ -110,15 +154,23 @@
         }
 
         .logout-btn {
-            display: inline-block;
-            margin-top: 15px;
+            position: absolute;
+            top: 70px;
+            right: 20px;
             padding: 10px 15px;
             background: #d9534f;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: bold;
             transition: 0.3s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
+
+.logout-btn:hover {
+    background: #c9302c;
+}
+
 
         .logout-btn:hover {
             background: #c9302c;
@@ -128,7 +180,7 @@
             display: inline-block;
             margin-top: 15px;
             padding: 12px 20px;
-            background: #ff4444;
+            background: #4d4b4b;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -138,7 +190,7 @@
         }
 
         .logout-btn:hover {
-            background: #cc0000;
+            background: #000000;
         }
 
         .footer {
@@ -151,16 +203,19 @@
 <body>
 
     <!-- Sidebar -->
+    <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
-        <a href="{{ url_for('dashboard') }}" class="active">Home</a>
-        <a href="{{ url_for('profile') }}" class="active">Profile</a>
-        <a href="{{ url_for('map') }}" class="active">Live Map</a>
-        <a href="#">Routes and Timings</a>
-        <a href="#">Settings</a>
-        <a href="#">Help</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('dashboard') }}" class="active">🏠 Home</a>
+        <a href="{{ url_for('profile') }}">👤 Profile</a>
+        <a href="{{ url_for('map') }}">🗺️ Live Map</a>
+        <a href="#">🚌 Routes & Timings</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="#">❓ Help</a>
+        <a href="{{ url_for('about') }}" class="active">ℹ️About us</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
     </div>
+
 
     <!-- Header with Menu Button -->
     <div class="header">

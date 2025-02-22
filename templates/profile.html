@@ -16,29 +16,31 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
+        /* Profile Container */
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.7);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-            width: 450px; /* Increased width */
+            width: 520px;
             text-align: center;
         }
 
         .profile-img {
-            width: 120px;  /* Increased size */
-            height: auto;  /* Maintain aspect ratio */
-            border: 1px solid #004aad; /* Keep the border */
-            object-fit: contain;  /* Ensure the full image is visible */
+            width: 150px;  /* Set fixed width */
+            height: 160px; /* Set fixed height to make it square */
+            border: 2px solid #004aad; 
+            object-fit: cover; /* Ensures the image fills the square */
         }
 
 
         h2 {
             color: #004aad;
             margin-top: 10px;
-            font-size: 24px; /* Slightly larger font */
+            font-size: 24px;
         }
 
         .info {
@@ -51,22 +53,25 @@
 
         .info p {
             margin: 10px 0;
-            font-size: 18px; /* Increased font size */
+            font-size: 18px;
             color: #333;
         }
 
-        .edit-btn {
+        .edit-btn, .back-btn {
             display: inline-block;
             margin-top: 20px;
             padding: 12px 25px;
-            background: #0077ff;
-            color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
             font-size: 16px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .edit-btn {
+            background: #0077ff;
+            color: white;
         }
 
         .edit-btn:hover {
@@ -74,37 +79,135 @@
         }
 
         .back-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
-            background: #d9534f;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            padding: 10px 15px;
+            background: #4d4b4b;
             color: white;
             text-decoration: none;
             border-radius: 8px;
+            font-weight: bold;
             transition: 0.3s;
             font-size: 16px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
         }
 
         .back-btn:hover {
-            background: #c9302c;
+            background: #000000;
+        }
+
+
+        /* Edit Profile Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .close-modal:hover {
+            color: red;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .save-btn {
+            background: #0077ff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .save-btn:hover {
+            background: #005bb5;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="{{ url_for('static', filename='profile.jpg') }}" class="profile-img" alt="Profile Picture">
-        <h2>Santhosh</h2>
-        
-        <div class="info">
-            <p><strong>📧 Email:</strong> {{ email }}</p>
-            <p><strong>📍 Location:</strong> {{ location }}</p>
-            <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
+    <!-- Profile Page Content -->
+    <a href="{{ url_for('dashboard') }}" class="back-btn">⬅ Back to Dashboard</a>
+        <div class="container">
+            <img src="{{ url_for('static', filename='profile.jpg') }}" class="profile-img" alt="Profile Picture">
+            <h2>Santhosh</h2>
+            
+            <div class="info">
+                <p><strong>📧 Email:</strong> {{ email }}</p>
+                <p><strong>📍 Location:</strong> {{ location }}</p>
+                <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
+            </div>
+
+            <a href="#" class="edit-btn" onclick="openModal()">Edit Profile</a>
         </div>
 
-        <a href="#" class="edit-btn">Edit Profile</a>
-        <a href="{{ url_for('dashboard') }}" class="back-btn">Back to Dashboard</a>
+
+    <!-- Edit Profile Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Edit Profile</h2>
+            <form action="{{ url_for('edit_profile') }}" method="POST">
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ email }}" required>
+                <label>Location:</label>
+                <input type="text" name="location" value="{{ location }}" required>
+                <label>Bus Route:</label>
+                <input type="text" name="bus_route" value="{{ bus_route }}" required>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+        </div>
     </div>
+
+    <script>
+        function openModal() { 
+            document.getElementById("editModal").style.display = "flex"; 
+        }
+        function closeModal() { 
+            document.getElementById("editModal").style.display = "none"; 
+        }
+    </script>
 
 </body>
 </html>
