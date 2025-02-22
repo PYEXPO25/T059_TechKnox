@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Driver</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(45deg, #4d4b4b, #151414);
+            color: white;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            margin-top: 60px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .message-box {
+            flex: 1;
+            overflow-y: auto;
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            max-height: 60vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .user-message {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .driver-message {
+            background: #e1e1e1;
+            align-self: flex-start;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: red;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .delete-btn:hover {
+            color: darkred;
+        }
+
+        textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        .send-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .send-btn i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        💬 Message
+    </div>
+
+    <div class="container">
+        <h2>🚍 Message Driver</h2>
+        
+        <!-- Message Display Box -->
+        <div id="messageBox" class="message-box"></div>
+
+        <!-- Message Input -->
+        <textarea id="message" placeholder="Type your message..."></textarea>
+
+        <!-- Send Button -->
+        <button class="send-btn" onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadMessages();
+        });
+
+        function loadMessages() {
+            let storedMessages = JSON.parse(localStorage.getItem("chatHistory")) || [];
+            let messageBox = document.getElementById("messageBox");
+            messageBox.innerHTML = "";
+
+            storedMessages.forEach((msg, index) => {
+                let messageContainer = document.createElement("div");
+                messageContainer.classList.add("message-container");
+
+                let msgDiv = document.createElement("div");
+                msgDiv.classList.add("message", msg.type);
+                msgDiv.textContent = msg.text;
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.innerHTML = "🗑️";
+                deleteBtn.onclick = function () {
+                    deleteMessage(index);
+                };
+
+                messageContainer.appendChild(msgDiv);
+                messageContainer.appendChild(deleteBtn);
+                messageBox.appendChild(messageContainer);
+            });
+
+            messageBox.scrollTop = messageBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            let message = document.getElementById("message").value.trim();
+            if (message === "") {
+                alert("Please enter a message.");
+                return;
+            }
+
+            let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+            chatHistory.push({ text: message, type: "user-message" });
+            localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
+
+            document.getElementById("message").value = "";
+            loadMessages();
+        }
+
+        function deleteMessage(index) {
+            let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+            chatHistory.splice(index, 1);
+            localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
+            loadMessages();
+        }
+    </script>
+
+</body>
+</html>

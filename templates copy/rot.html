@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Routes | KGiSL Campus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header {
+            width: 100%;
+            background: linear-gradient(45deg, #565252, #3d3838, #000000);
+            color: white;
+            padding: 15px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center; /* Ensures text is centered */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers content horizontally */
+            z-index: 1000;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            animation: header-glow 3s infinite alternate;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #4d4b4b, #151414);
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Sidebar Links */
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            text-align: left;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* Sidebar Hover Effect */
+        .sidebar a:hover, .sidebar a.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #1d1d1d;
+            transform: translateX(5px);
+        }
+
+        /* Sidebar Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #131211;
+        }
+
+        /* Sidebar Icons */
+        .sidebar a::before {
+            content: "•";
+            font-size: 22px;
+            color: #2d2d29;
+            position: absolute;
+            left: 10px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover::before {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Smooth Sidebar Opening */
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 250px; }
+        }
+
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+
+
+
+
+        /* Route Button */
+        /* Adjusted Route Button Position */
+        .route {
+            background: #4d4b4b;
+            color: white;
+            padding: 15px;
+            margin: 10px auto;
+            border: none;
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+/* Push the first button down from the fixed header */
+.route:first-of-type {
+    margin-top: 80px; /* Adjust the value as needed */
+}
+
+        .menu-icon {
+            position: absolute;
+            left: 20px; /* Align to the left */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            background: none;
+            border: none;
+        }
+
+
+        .route:hover {
+            background: #000000;
+        }
+
+        .arrow {
+            transition: transform 0.5s ease;
+        }
+
+        .rotate {
+            transform: rotate(90deg);
+        }
+
+        .sub-points {
+            display: none;
+            padding: 10px;
+            text-align: left;
+            background: #f9f9f9;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            border-left: 4px solid #000000;
+        }
+
+        .route-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
+        <a href="{{ url_for('dashboard') }}" class="active">🏠 Home</a>
+        <a href="{{ url_for('profile') }}">👤 Profile</a>
+        <a href="{{ url_for('map') }}">🗺️ Live Map</a>
+        <a href="{{ url_for('rot') }}">🚌 Routes & Timings</a>
+        <a href="{{ url_for('settings') }}">⚙️ Settings</a>
+        <a href="{{ url_for('message') }}">💬 Message</a>
+        <a href="{{ url_for('noti') }}">🔔 Notification</a>
+        <a href="{{ url_for('about') }}" class="active">ℹ️About us</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+
+
+    <!-- Header with Menu Button -->
+    <div class="header">
+        <span class="menu-icon" onclick="toggleNav()">☰</span>
+        🚍 KGiSL Campus Bus Routes
+    </div>
+
+   
+
+    <!-- Routes List -->
+    <button class="route" onclick="toggleDropdown('route1')">
+        Route No : 1 - Sirumugai - Reyon Nagar to KGiSL Campus
+        <span class="arrow">▼</span>
+    </button>
+    <div id="route1" class="sub-points">
+        <img src="{{ url_for('static', filename='rot1.png') }}" alt="Route 1 Map" class="route-image">
+    </div>
+
+    <button class="route" onclick="toggleDropdown('route2')">
+        Route No : 2 - Vadavalli to KGiSL Campus
+        <span class="arrow">▼</span>
+    </button>
+    <div id="route2" class="sub-points">
+        <img src="{{ url_for('static', filename='rot2.png') }}" alt="Route 2 Map" class="route-image">
+    </div>
+
+    <button class="route" onclick="toggleDropdown('route3')">
+        Route No : 3 - Palladam to KGiSL Campus
+        <span class="arrow">▼</span>
+    </button>
+    <div id="route3" class="sub-points">
+        <img src="{{ url_for('static', filename='rot3.png') }}" alt="Route 3 Map" class="route-image">
+    </div>
+
+    <!-- JavaScript for Dropdown and Slider -->
+    <script>
+        function toggleDropdown(id) {
+            var element = document.getElementById(id);
+            var button = element.previousElementSibling;
+            var arrow = button.querySelector(".arrow");
+
+            if (element.style.display === "block") {
+                element.style.display = "none";
+                arrow.classList.remove("rotate");
+            } else {
+                element.style.display = "block";
+                arrow.classList.add("rotate");
+            }
+        }
+
+        // Slider Functionality
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlides() {
+            slideIndex++;
+            if (slideIndex >= totalSlides) {
+                slideIndex = 0;
+            }
+            document.querySelector('.slider').style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        setInterval(showSlides, 3000);
+    </script>
+
+    <script>
+        function toggleNav() {
+            let sidebar = document.getElementById("mySidebar");
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

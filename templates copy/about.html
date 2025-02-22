@@ -117,16 +117,18 @@
 </head>
 <body>
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">&times;</a>
-        <a href="{{ url_for('dashboard') }}">🏠 Home</a>
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
+        <a href="{{ url_for('dashboard') }}" class="active">🏠 Home</a>
         <a href="{{ url_for('profile') }}">👤 Profile</a>
         <a href="{{ url_for('map') }}">🗺️ Live Map</a>
-        <a href="#">🚌 Routes & Timings</a>
-        <a href="#">⚙️ Settings</a>
-        <a href="#">❓ Help</a>
+        <a href="{{ url_for('rot') }}">🚌 Routes & Timings</a>
+        <a href="{{ url_for('settings') }}">⚙️ Settings</a>
+        <a href="{{ url_for('message') }}">💬 Message</a>
+        <a href="{{ url_for('noti') }}">🔔 Notification</a>
         <a href="{{ url_for('about') }}" class="active">ℹ️About us</a>
         <a href="{{ url_for('logout') }}">🚪 Logout</a>
     </div>
+
 
     <div class="header">
         <span class="menu-icon" onclick="toggleNav()">☰</span>
@@ -143,6 +145,12 @@
         <h2>Contact Details</h2>
         <p><strong>Phone:</strong> 9600944550</p>
         <p><strong>Email:</strong> techknox@gmail.com</p>
+        <h2>Developers (Tech Knox)</h2>
+        <p>Santhosh</p>
+        <p>Sharan</p>
+        <p>Sanjay</p>
+        <p>Thedheish</p>
+
     </div>
 
     <a href="https://www.instagram.com/tech_.knox/" target="_blank" class="insta-btn">

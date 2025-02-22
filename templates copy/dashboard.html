@@ -209,9 +209,10 @@
         <a href="{{ url_for('dashboard') }}" class="active">🏠 Home</a>
         <a href="{{ url_for('profile') }}">👤 Profile</a>
         <a href="{{ url_for('map') }}">🗺️ Live Map</a>
-        <a href="#">🚌 Routes & Timings</a>
-        <a href="#">⚙️ Settings</a>
-        <a href="#">❓ Help</a>
+        <a href="{{ url_for('rot') }}">🚌 Routes & Timings</a>
+        <a href="{{ url_for('settings') }}">⚙️ Settings</a>
+        <a href="{{ url_for('message') }}">💬 Message</a>
+        <a href="{{ url_for('noti') }}">🔔 Notification</a>
         <a href="{{ url_for('about') }}" class="active">ℹ️About us</a>
         <a href="{{ url_for('logout') }}">🚪 Logout</a>
     </div>

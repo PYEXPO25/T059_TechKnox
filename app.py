@@ -69,6 +69,25 @@ def map():
         return redirect(url_for("login"))
     return render_template('map.html')  # Render the map page
 
+@app.route('/rot')
+def rot():
+    return render_template('rot.html')  # Ensure you have 'rot.html' in your templates folder
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+@app.route('/noti')
+def noti():
+    return render_template('noti.html')
+
+@app.route('/message')
+def message():
+    return render_template('message.html')
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
