@@ -92,6 +92,10 @@ https://drive.google.com/file/d/18w-PtlVfkhcwFeQie8jy_lfzKUvpPby8/view?usp=drive
 ## over all folder of demo video and PPT
 https://drive.google.com/drive/folders/1bdBAGTNtmyMk-1ENNH-kQNvQrncUdogG?usp=drive_link
 
+
+
+![Image](https://github.com/user-attachments/assets/2bfda925-ed04-4357-afaf-da1c5a4df62b)
+
 ---
 
 🚀 **Developed with ❤️ by [Team Tech_Knox]**
