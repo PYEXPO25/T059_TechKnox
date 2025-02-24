@@ -126,7 +126,7 @@ https://drive.google.com/drive/folders/1bdBAGTNtmyMk-1ENNH-kQNvQrncUdogG?usp=dri
 
 ![Image](https://github.com/user-attachments/assets/ea63b4a4-0f79-4c78-ba6e-d1e8ccd7fe22)
 
- ABOUT US PAGE
+## ABOUT US PAGE
 
 ![Image](https://github.com/user-attachments/assets/92fb7cf1-6a85-4edf-bf30-8583724e877d)
 
