@@ -100,6 +100,12 @@ https://drive.google.com/drive/folders/1bdBAGTNtmyMk-1ENNH-kQNvQrncUdogG?usp=dri
 
 ## DASHBOARD
 
+![Image](https://github.com/user-attachments/assets/42d4a805-4faf-4d23-868c-f8a89d5e4290)
+
+## BUTTON SLIDER
+
+
+
 
 
 ---
