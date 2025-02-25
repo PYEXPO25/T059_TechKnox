@@ -44,23 +44,15 @@ This folder contains media assets used in the **College Bus Live Location Tracki
 
 
 ## 🎥 Videos
-- `videos/demo.mp4` – Demo video showcasing the app
+### Demo video showcasing the web
 
-## 🎞 GIFs
-- `gifs/loading.gif` – Loading animation
-- `gifs/bus_tracking.gif` – Live tracking animation
+https://drive.google.com/file/d/1KphNVTlRHtROGWSbx2_u5CbFWyl_84Qy/view?usp=drive_link
 
-## 🎨 Icons
-- `icons/phone_icon.png` – Phone call icon
-- `icons/location_icon.png` – Location marker icon
+## 🕹️HARDWARE images
 
-## 📢 Banners
-- `banners/header_banner.png` – Header banner for GitHub README
+
+
 
 ---
 
-🔹 **How to Use?**  
-Simply reference the media files in `README.md` using the correct path:  
-```md
-![Dashboard](media/screenshots/dashboard.png)
 
