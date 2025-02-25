@@ -1,4 +1,4 @@
-# College Bus Live Location Tracking
+# College Bus Live Location Tracking and Route Optimization.
 
 ## 📌 Project Overview
 This project is a **live location tracking system for college buses**, utilizing an **ESP-32 microcontroller**, **NEO-6M GPS module**, and **Flask** backend. The system fetches real-time GPS coordinates and transmits them to a web-based interface for tracking.
