@@ -1,3 +1,7 @@
+# GRAND PY-EXPO-25
+
+![Image](https://github.com/user-attachments/assets/cd73c087-f63c-44f3-8df6-d51b312e369d)
+
 # College Bus Live Location Tracking and Route Optimization.
 
 ## 📌 Project Overview
