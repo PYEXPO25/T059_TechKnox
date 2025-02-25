@@ -174,7 +174,7 @@
             <h2>Santhosh</h2>
             
             <div class="info">
-                <p><strong>📧 Email:</strong> {{ email }}</p>
+                <p><strong>📞Phone:</strong> <a href="tel:{{ Phone }}">{{ Phone }}</a></p>
                 <p><strong>📍 Location:</strong> {{ location }}</p>
                 <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
             </div>
@@ -189,8 +189,8 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2>Edit Profile</h2>
             <form action="{{ url_for('edit_profile') }}" method="POST">
-                <label>Email:</label>
-                <input type="email" name="email" value="{{ email }}" required>
+                <label>Phone:</label>
+                <input type="phone" name="phone" value="{{ phone }}" required>
                 <label>Location:</label>
                 <input type="text" name="location" value="{{ location }}" required>
                 <label>Bus Route:</label>
