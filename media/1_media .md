@@ -41,14 +41,23 @@ This folder contains media assets used in the **College Bus Live Location Tracki
 
  ![Image](https://github.com/user-attachments/assets/92fb7cf1-6a85-4edf-bf30-8583724e877d)
 
-
+___
 
 ## 🎥 Videos
 ### Demo video showcasing the web
 
 https://drive.google.com/file/d/1KphNVTlRHtROGWSbx2_u5CbFWyl_84Qy/view?usp=drive_link
+___
 
 ## 🕹️HARDWARE images
+
+### NEO-7M GPS MODULE
+
+![Image](https://github.com/user-attachments/assets/6dcd44fc-c87f-4933-8d69-6961276b7430)
+
+### ESP-32 Development board
+
+![Image](https://github.com/user-attachments/assets/e9f2633e-ac55-405d-853f-5f481f86f463)
 
 
 
