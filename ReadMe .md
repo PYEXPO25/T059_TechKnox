@@ -90,6 +90,16 @@ python app.py
 ### **4️⃣ Run the Frontend**
 Simply open `index.html` in a browser or set up a local web server.
 
+#### Start the Application
+
+1. Run the Flask application:
+   bash
+   flask run
+   
+2. Open your browser and navigate to:
+   
+   http://127.0.0.1:5000/
+
 ## 📡 Data Flow
 1. **ESP-32** reads GPS data.
 2. Data is sent to the **Flask server** via HTTP/MQTT.
