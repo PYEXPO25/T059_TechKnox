@@ -1,7 +1,26 @@
-# College Bus Live Location Tracking
+# GRAND PY-EXPO-25
+
+![Image](https://github.com/user-attachments/assets/cd73c087-f63c-44f3-8df6-d51b312e369d)
+
+___
+
+# College Bus Live Location Tracking and Route Optimization.
+___
+
+### Problem Statement ID – PY118- Student inovation
 
 ## 📌 Project Overview
 This project is a **live location tracking system for college buses**, utilizing an **ESP-32 microcontroller**, **NEO-6M GPS module**, and **Flask** backend. The system fetches real-time GPS coordinates and transmits them to a web-based interface for tracking.
+___
+
+## Team Members
+
+*Team ID – T059*
+
+- *Santhosh. I* - Team Leader
+- *Sharan. B* - Backend
+- *Sanjay. S* - Hardware connection
+- *Thedheish. B.R* - Backend
 
 ## 🛠️ Tech Stack
 ### **Hardware**
@@ -70,6 +89,16 @@ python app.py
 
 ### **4️⃣ Run the Frontend**
 Simply open `index.html` in a browser or set up a local web server.
+
+#### Start the Application
+
+1. Run the Flask application:
+   bash
+   flask run
+   
+2. Open your browser and navigate to:
+   
+   http://127.0.0.1:5000/
 
 ## 📡 Data Flow
 1. **ESP-32** reads GPS data.
