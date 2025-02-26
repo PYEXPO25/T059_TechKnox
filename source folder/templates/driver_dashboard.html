@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: url("{{ url_for('static', filename='bus.jpg') }}") no-repeat center center fixed;
+            background: url("{{ url_for('static', filename='dddbus.png') }}") no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -132,15 +132,9 @@
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
-        <a href="{{ url_for('dashboard') }}" class="active">🏠 Home</a>
-        <a href="{{ url_for('profile') }}">👤 Profile</a>
-        <a href="{{ url_for('map') }}">🗺️ Live Map</a>
-        <a href="{{ url_for('rot') }}">🚌 Routes & Timings</a>
-        <a href="{{ url_for('settings') }}">⚙️ Settings</a>
-        <a href="{{ url_for('message') }}">💬 Message</a>
-        <a href="{{ url_for('noti') }}">🔔 Notification</a>
+        <a href="{{ url_for('driver_dashboard') }}" class="active">🏠 Home</a>
         <a href="{{ url_for('about') }}">ℹ️ About us</a>
-        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+        <a href="{{ url_for('signout') }}">🚪 Logout</a>
     </div>
 
     <div class="header">
@@ -157,7 +151,7 @@
         </div>
 
         <button class="notification-btn" id="notifyBtn">Send SMS Notification</button>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        <a href="{{ url_for('signout') }}" class="logout-btn">Logout</a>
     </div>
 
     <script>

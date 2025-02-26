@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Bus Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='bus.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Typing animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 60%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 52px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            border-right: 4px solid white;  /* Cursor effect */
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(30, end) forwards, blink 0.7s infinite;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; /* Centers items instead of pushing them apart */
+            gap: 200px; /* Controls the spacing between items */
+            width: 40%; /* Reduce width to bring elements closer */
+            margin-top: 20px;
+        }
+
+        .login-option {
+            text-align: center;
+        }
+
+        .login-option img {
+            width: 180px;  
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-option img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-option p {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="typing-text">Welcome to Bus-Buddy Tracking...</h1>
+
+    <div class="container">
+        <div class="login-option">
+            <a href="{{ url_for('driver_dashboard') }}">
+                <img src="{{ url_for('static', filename='drive.jpg') }}" alt="Driver Login">
+            </a>
+            <p>Driver Login</p>
+        </div>
+        
+        <div class="login-option">
+            <a href="{{ url_for('login') }}">
+                <img src="{{ url_for('static', filename='student.png') }}" alt="Student Login">
+            </a>
+            <p>Student Login</p>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById("typing-text").style.borderRight = "none";  // Remove cursor after animation
+        }, 3000); // Match the typing animation duration
+    </script>
+
+</body>
+</html>

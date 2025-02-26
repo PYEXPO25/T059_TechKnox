@@ -1,25 +1,40 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from twilio.rest import Client
 
 app = Flask(__name__)
 app.secret_key = "secret123"  # Secret key for session management
+
+# Twilio Credentials
+SID = 'ACe50aceb83710a9bd6f71cc4392c80881'
+TOKEN = '53e0b62bab0e889dbb79b9765bedd259'
+TWILIO_NUMBER = '+15344002098'  # Your Twilio Number
+
+# Initialize Twilio Client
+client = Client(SID, TOKEN)
 
 # Dummy user credentials and profile data
 USER_CREDENTIALS = {"24uad233": "2025"}
 USER_PROFILES = {
     "24uad233": {
-        "email": "santhosh@example.com",
+        "phone": "9600944550",
         "location": "Chennai",
         "bus_route": "Route 42"
     }
 }
 
-@app.route("/", methods=["GET", "POST"])
+# Dummy driver credentials
+DRIVER_CREDENTIALS = {"driver42": "buspass"}
+
+@app.route("/")
+def frontpage():
+    return render_template("frontpage.html")
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
 
-        # Check credentials
         if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
             session["user"] = username  # Store user session
             return redirect(url_for("dashboard"))
@@ -48,7 +63,8 @@ def edit_profile():
         return redirect(url_for("login"))
 
     username = session["user"]
-    USER_PROFILES[username]["email"] = request.form["email"]
+    
+    USER_PROFILES[username]["phone"] = request.form["phone"]
     USER_PROFILES[username]["location"] = request.form["location"]
     USER_PROFILES[username]["bus_route"] = request.form["bus_route"]
 
@@ -57,7 +73,14 @@ def edit_profile():
 @app.route("/logout")
 def logout():
     session.pop("user", None)
+    session.pop("driver", None)
     return redirect(url_for("login"))
+
+@app.route("/signout")
+def signout():
+    session.pop("user", None)
+    session.pop("driver", None)
+    return redirect(url_for("login_driver"))
 
 @app.route("/about")  
 def about():
@@ -67,11 +90,11 @@ def about():
 def map():
     if "user" not in session:
         return redirect(url_for("login"))
-    return render_template('map.html')  # Render the map page
+    return render_template('map.html')
 
 @app.route('/rot')
 def rot():
-    return render_template('rot.html')  # Ensure you have 'rot.html' in your templates folder
+    return render_template('rot.html')
 
 @app.route('/settings')
 def settings():
@@ -85,9 +108,50 @@ def noti():
 def message():
     return render_template('message.html')
 
+# 🚀 SMS Notification Route
+@app.route('/send-notification', methods=['POST'])
+def send_notification():
+    if "user" not in session:
+        return jsonify({"error": "Unauthorized"}), 403
 
+    username = session["user"]
+    user_data = USER_PROFILES.get(username, {})
+    phone_number = user_data.get("phone")
 
+    if not phone_number:
+        return jsonify({"error": "Phone number not found"}), 400
 
+    try:
+        message = client.messages.create(
+            body="Your bus has arrived at your station!",
+            from_=TWILIO_NUMBER,
+            to=f"+91{phone_number}"
+        )
+        return jsonify({"status": "success", "message_sid": message.sid})
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)})
+
+# Driver Login Route
+@app.route("/login_driver", methods=["GET", "POST"])
+def login_driver():
+    if request.method == "POST":
+        driver_id = request.form.get("driver_id")
+        password = request.form.get("password")
+
+        if driver_id in DRIVER_CREDENTIALS and DRIVER_CREDENTIALS[driver_id] == password:
+            session["driver"] = driver_id  # Store driver session
+            return redirect(url_for("driver_dashboard"))
+        else:
+            return render_template("login_driver.html", error="Invalid Driver ID or Password")
+
+    return render_template("login_driver.html", error=None)
+
+# Driver Dashboard Route
+@app.route("/driver_dashboard")
+def driver_dashboard():
+    if "driver" not in session:
+        return redirect(url_for("login_driver"))  # Redirect to driver login
+    return render_template("driver_dashboard.html", username=session["driver"])
 
 if __name__ == "__main__":
     app.run(debug=True)

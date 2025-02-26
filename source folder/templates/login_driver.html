@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url("{{ url_for('static', filename='Transport.jpg') }}") no-repeat center center fixed;
+            background: url("{{ url_for('static', filename='dbus.jpg') }}") no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -196,7 +196,7 @@
 <body>
 
     <div class="header">
-        <span>KG-ROUTES (Student-login)</span>
+        <span>KG-ROUTES (Driver-login)</span>
         <a href="{{ url_for('about') }}" class="about-btn">About</a>
     </div>
 
@@ -208,13 +208,13 @@
             <img src="{{ url_for('static', filename='kgbus.png') }}" alt="KG Routes Logo">
         </div>
 
-        <h2>STUDENT LOGIN</h2>
+        <h2>DRIVER LOGIN</h2>
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
         <form method="POST">
-            <input type="text" name="username" placeholder="Enter Username" required><br>
-            <input type="password" name="password" placeholder="Enter Password" required><br>
+            <input type="text" name="driver_id" placeholder="Enter Driver ID" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
             <button type="submit">Login</button>
         </form>
         <p class="login-footer">🚍 Track your college bus in real-time!</p>

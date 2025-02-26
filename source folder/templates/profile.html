@@ -19,9 +19,8 @@
             flex-direction: column;
         }
 
-        /* Profile Container */
         .container {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
@@ -30,12 +29,12 @@
         }
 
         .profile-img {
-            width: 150px;  /* Set fixed width */
-            height: 160px; /* Set fixed height to make it square */
-            border: 2px solid #004aad; 
-            object-fit: cover; /* Ensures the image fills the square */
+            width: 150px;
+            height: 160px;
+            border: 3px solid #004aad;
+            border-radius: 10px;
+            object-fit: cover;
         }
-
 
         h2 {
             color: #004aad;
@@ -87,18 +86,12 @@
             color: white;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-            font-size: 16px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
         }
 
         .back-btn:hover {
-            background: #000000;
+            background: #000;
         }
 
-
-        /* Edit Profile Modal */
         .modal {
             display: none;
             position: fixed;
@@ -108,16 +101,17 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .modal-content {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-            width: 400px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            width: 450px;
             text-align: center;
             position: relative;
         }
@@ -135,29 +129,43 @@
             color: red;
         }
 
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
         label {
             display: block;
-            margin: 10px 0 5px;
             font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
         }
 
         input {
-            width: 90%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #0077ff;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #005bb5;
+            box-shadow: 0px 0px 10px rgba(0, 119, 255, 0.3);
         }
 
         .save-btn {
             background: #0077ff;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
+            width: 100%;
         }
 
         .save-btn:hover {
@@ -166,48 +174,49 @@
     </style>
 </head>
 <body>
-
-    <!-- Profile Page Content -->
     <a href="{{ url_for('dashboard') }}" class="back-btn">⬅ Back to Dashboard</a>
-        <div class="container">
-            <img src="{{ url_for('static', filename='profile.jpg') }}" class="profile-img" alt="Profile Picture">
-            <h2>Santhosh</h2>
-            
-            <div class="info">
-                <p><strong>📞Phone:</strong> <a href="tel:{{ Phone }}">{{ Phone }}</a></p>
-                <p><strong>📍 Location:</strong> {{ location }}</p>
-                <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
-            </div>
-
-            <a href="#" class="edit-btn" onclick="openModal()">Edit Profile</a>
+    <div class="container">
+        <img src="{{ url_for('static', filename='profile.jpg') }}" class="profile-img" alt="Profile Picture">
+        <h2>{{ username }}</h2>
+        
+        <div class="info">
+            <p><strong>📞 Phone:</strong> <a href="tel:{{ phone }}">{{ phone }}</a></p>
+            <p><strong>📍 Location:</strong> {{ location }}</p>
+            <p><strong>🚍 Bus Route:</strong> {{ bus_route }}</p>
         </div>
 
+        <button class="edit-btn" onclick="openModal()">Edit Profile</button>
+    </div>
 
-    <!-- Edit Profile Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2>Edit Profile</h2>
-            <form action="{{ url_for('edit_profile') }}" method="POST">
-                <label>Phone:</label>
-                <input type="phone" name="phone" value="{{ phone }}" required>
-                <label>Location:</label>
-                <input type="text" name="location" value="{{ location }}" required>
-                <label>Bus Route:</label>
-                <input type="text" name="bus_route" value="{{ bus_route }}" required>
-                <button type="submit" class="save-btn">Save Changes</button>
+            <form action="{{ url_for('edit_profile') }}" method="post">
+                <div class="form-group">
+                    <label for="phone">📞 Phone Number:</label>
+                    <input type="text" id="phone" name="phone" value="{{ phone }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">📍 Location:</label>
+                    <input type="text" id="location" name="location" value="{{ location }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="bus_route">🚍 Bus Route:</label>
+                    <input type="text" id="bus_route" name="bus_route" value="{{ bus_route }}" required>
+                </div>
+                <button type="submit" class="save-btn">💾 Save Changes</button>
             </form>
         </div>
     </div>
 
     <script>
-        function openModal() { 
-            document.getElementById("editModal").style.display = "flex"; 
+        function openModal() {
+            document.getElementById("editModal").style.display = "flex";
         }
-        function closeModal() { 
-            document.getElementById("editModal").style.display = "none"; 
+        function closeModal() {
+            document.getElementById("editModal").style.display = "none";
         }
     </script>
-
 </body>
 </html>
