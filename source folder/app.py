@@ -153,5 +153,44 @@ def driver_dashboard():
         return redirect(url_for("login_driver"))  # Redirect to driver login
     return render_template("driver_dashboard.html", username=session["driver"])
 
+@app.route('/students_list')
+def students_list():
+    return render_template('students_list.html') 
+
+@app.route('/drivenoti')
+def drivenoti():
+    return render_template('drivenoti.html')
+
+
+@app.route('/')
+def home():
+    return render_template('drivenoti.html')
+
+@app.route('/send_call', methods=['POST'])
+def send_call():
+    try:
+        twiml_response = '<Response><Say voice="alice" language="en-GB">Hello! This is your bus tracking system notification. Your bus will arrive at your station in 10 minutes. So hurry up!</Say></Response>'
+        call = client.calls.create(
+            twiml=twiml_response,
+            to= +919600944550,
+            from_= +15344002098
+        )
+        return jsonify({"message": f"Call initiated! Call SID: {call.sid}"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+@app.route('/send_sms', methods=['POST'])
+def send_sms():
+    try:
+        message = client.messages.create(
+            body="Hello! Your bus will arrive at your station in 10 minutes. Hurry up!",
+            from_=+15344002098,
+            to=+919600944550
+        )
+        return jsonify({"message": f"SMS sent! Message SID: {message.sid}"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
 if __name__ == "__main__":
     app.run(debug=True)

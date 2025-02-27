@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Student Details</h2>
+
+    <table>
+        <tr>
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Boarding Point</th>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>Amit Kumar</td>
+            <td>MG Road</td>
+        </tr>
+        <tr>
+            <td>102</td>
+            <td>Pooja Sharma</td>
+            <td>Jayanagar</td>
+        </tr>
+        <tr>
+            <td>103</td>
+            <td>Rahul Verma</td>
+            <td>Electronic City</td>
+        </tr>
+        <tr>
+            <td>104</td>
+            <td>Neha Singh</td>
+            <td>Banashankari</td>
+        </tr>
+        <tr>
+            <td>105</td>
+            <td>Vikram Raj</td>
+            <td>Whitefield</td>
+        </tr>
+        <tr>
+            <td>106</td>
+            <td>Deepa Joshi</td>
+            <td>Marathahalli</td>
+        </tr>
+        <tr>
+            <td>107</td>
+            <td>Ravi Reddy</td>
+            <td>Hebbal</td>
+        </tr>
+        <tr>
+            <td>108</td>
+            <td>Anjali Mehta</td>
+            <td>Koramangala</td>
+        </tr>
+        <tr>
+            <td>109</td>
+            <td>Manoj Patil</td>
+            <td>BTM Layout</td>
+        </tr>
+        <tr>
+            <td>110</td>
+            <td>Ritu Yadav</td>
+            <td>Yelahanka</td>
+        </tr>
+        <tr>
+            <td>111</td>
+            <td>Sumit Das</td>
+            <td>KR Puram</td>
+        </tr>
+        <tr>
+            <td>112</td>
+            <td>Sneha Rao</td>
+            <td>Majestic</td>
+        </tr>
+        <tr>
+            <td>113</td>
+            <td>Rohit Malhotra</td>
+            <td>Hosur Road</td>
+        </tr>
+        <tr>
+            <td>114</td>
+            <td>Priya Nair</td>
+            <td>Indiranagar</td>
+        </tr>
+        <tr>
+            <td>115</td>
+            <td>Karthik Iyer</td>
+            <td>Bellandur</td>
+        </tr>
+        <tr>
+            <td>116</td>
+            <td>Swati Mishra</td>
+            <td>HSR Layout</td>
+        </tr>
+        <tr>
+            <td>117</td>
+            <td>Akash Tiwari</td>
+            <td>Basavanagudi</td>
+        </tr>
+        <tr>
+            <td>118</td>
+            <td>Sonali Gupta</td>
+            <td>Ulsoor</td>
+        </tr>
+        <tr>
+            <td>119</td>
+            <td>Rajesh Sharma</td>
+            <td>Malleshwaram</td>
+        </tr>
+        <tr>
+            <td>120</td>
+            <td>Meena Reddy</td>
+            <td>Kengeri</td>
+        </tr>
+    </table>
+
+    <a href="{{ url_for('driver_dashboard') }}" class="back-btn">Back to Dashboard</a>
+
+</body>
+</html>

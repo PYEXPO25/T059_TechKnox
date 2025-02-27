@@ -17,6 +17,8 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            text-align: center;
+            position: relative;
         }
 
         .header {
@@ -44,62 +46,12 @@
             left: 15px;
         }
 
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: linear-gradient(45deg, #4d4b4b, #151414);
-            overflow-x: hidden;
-            transition: 0.4s;
-            padding-top: 60px;
-            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .sidebar a {
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-
-        .sidebar a:hover, .sidebar a.active {
-            background: rgba(255, 255, 255, 0.2);
-            border-left: 4px solid #1d1d1d;
-        }
-
-        .close-btn {
+        .logout-btn {
             position: absolute;
             top: 15px;
-            right: 20px;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .container {
-            width: 350px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .tracking-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f4f4f4;
-            border-radius: 8px;
-        }
-
-        .logout-btn {
-            padding: 12px 20px;
-            background: #4d4b4b;
+            right: 15px;
+            padding: 10px 15px;
+            background: #ff4d4d;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -108,50 +60,158 @@
         }
 
         .logout-btn:hover {
-            background: #000000;
+            background: #cc0000;
         }
 
-        .notification-btn {
-            padding: 12px 20px;
-            background: #28a745;
+        .welcome-text {
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
+            font-size: 52px;
             font-weight: bold;
-            transition: 0.3s;
-            display: inline-block;
-            margin-top: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            border-right: 4px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(30, end) forwards, blink 0.7s infinite;
+            margin-top: -200px;
         }
 
-        .notification-btn:hover {
-            background: #218838;
+        @keyframes typing {
+            0% { width: 0; border-right: 4px solid white; }
+            100% { width: 70%; border-right: none; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #222;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: 5px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 100px;
+        }
+
+        /* Image button wrapper */
+        .image-button-wrapper {
+            text-align: center;
+        }
+
+        /* Image buttons */
+        .image-button {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+        }
+
+        .image-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .image-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Button captions */
+        .button-caption {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
 <body>
 
+    <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">×</a>
-        <a href="{{ url_for('driver_dashboard') }}" class="active">🏠 Home</a>
-        <a href="{{ url_for('about') }}">ℹ️ About us</a>
-        <a href="{{ url_for('signout') }}">🚪 Logout</a>
+        <span class="close-btn" onclick="toggleNav()">×</span>
+        <a href="#">Home</a>
+        <a href="#">Live Tracking</a>
+        <a href="#">Route Map</a>
+        <a href="#">Schedule</a>
+        <a href="#">Settings</a>
     </div>
 
+    <!-- Header -->
     <div class="header">
         <span class="menu-icon" onclick="toggleNav()">☰</span>
         🚍 KG-ROUTES Home
     </div>
 
-    <div class="container">
-        <h2>Welcome, {{ username }}</h2>
-        <p>You are logged in. Track your college bus below.</p>
-        
-        <div class="tracking-section">
-            <p>📍 <strong>Live Bus Location:</strong> Updating...</p>
+    <a href="{{ url_for('signout') }}" class="logout-btn">Logout</a>
+
+    <h2 class="welcome-text">Welcome, {{ username }}</h2>
+    <p style="color: white; margin-top: -40px;">You are logged in.</p>
+
+    <!-- Image Buttons -->
+    <div class="button-container">
+        <div class="image-button-wrapper">
+            <a href="{{ url_for('students_list') }}" class="image-button">
+                <img src="{{ url_for('static', filename='studentlogo.jpg') }}" alt="Students">
+            </a>
+            <span class="button-caption">STUDENTS</span>
         </div>
 
-        <button class="notification-btn" id="notifyBtn">Send SMS Notification</button>
-        <a href="{{ url_for('signout') }}" class="logout-btn">Logout</a>
+        <div class="image-button-wrapper">
+            <a href="{{ url_for('drivenoti') }}" class="image-button">
+                <img src="{{ url_for('static', filename='notilogo.png') }}" alt="Route Map">
+            </a>
+            <span class="button-caption">NOTIFICATION</span>
+        </div>
+
+        <div class="image-button-wrapper">
+            <a href="{{ url_for('drivenoti') }}" class="image-button">
+                <img src="{{ url_for('static', filename='messagelogo.png') }}" alt="Bus Schedule">
+            </a>
+            <span class="button-caption">MESSAGE</span>
+        </div>
     </div>
 
     <script>
@@ -163,25 +223,6 @@
                 sidebar.style.width = "250px";
             }
         }
-
-        document.getElementById("notifyBtn").addEventListener("click", function() {
-            fetch("/send-notification", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert("Notification sent successfully! SID: " + data.message_sid);
-                } else {
-                    alert("Error: " + data.error);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Failed to send notification.");
-            });
-        });
     </script>
 
 </body>

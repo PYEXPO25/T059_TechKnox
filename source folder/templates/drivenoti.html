@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification System</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .notify-btn {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .call-btn {
+            background: #28a745;
+        }
+
+        .call-btn:hover {
+            background: #218838;
+        }
+
+        .sms-btn {
+            background: #007bff;
+        }
+
+        .sms-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Notification System</h2>
+    <p>Click a button to send a call or SMS notification.</p>
+
+    <div class="button-container">
+        <button class="notify-btn call-btn" onclick="sendCall()">Call Notification</button>
+        <button class="notify-btn sms-btn" onclick="sendSMS()">SMS Notification</button>
+    </div>
+
+    <script>
+        function sendCall() {
+            fetch('/send_call', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message || data.error))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function sendSMS() {
+            fetch('/send_sms', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message || data.error))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</body>
+</html>
