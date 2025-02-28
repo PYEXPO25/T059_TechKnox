@@ -201,18 +201,18 @@
 
         <div class="image-button-wrapper">
             <a href="{{ url_for('drivenoti') }}" class="image-button">
-                <img src="{{ url_for('static', filename='notilogo.png') }}" alt="Route Map">
+                <img src="{{ url_for('static', filename='notilogo.png') }}" alt="Notification">
             </a>
             <span class="button-caption">NOTIFICATION</span>
         </div>
 
         <div class="image-button-wrapper">
-            <a href="{{ url_for('drivenoti') }}" class="image-button">
-                <img src="{{ url_for('static', filename='messagelogo.png') }}" alt="Bus Schedule">
+            <a href="{{ url_for('driver_message') }}" class="image-button">
+                <img src="{{ url_for('static', filename='messagelogo.png') }}" alt="Message">
             </a>
             <span class="button-caption">MESSAGE</span>
         </div>
-    </div>
+        
 
     <script>
         function toggleNav() {

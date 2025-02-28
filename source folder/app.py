@@ -6,7 +6,7 @@ app.secret_key = "secret123"  # Secret key for session management
 
 # Twilio Credentials
 SID = 'ACe50aceb83710a9bd6f71cc4392c80881'
-TOKEN = '53e0b62bab0e889dbb79b9765bedd259'
+TOKEN = '958d1f80e91293813997a023b3fc54fb'
 TWILIO_NUMBER = '+15344002098'  # Your Twilio Number
 
 # Initialize Twilio Client
@@ -160,6 +160,10 @@ def students_list():
 @app.route('/drivenoti')
 def drivenoti():
     return render_template('drivenoti.html')
+
+@app.route('/driver_message')
+def driver_message():
+    return render_template('driver_message.html')
 
 
 @app.route('/')

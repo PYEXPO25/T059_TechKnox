@@ -81,6 +81,23 @@
             cursor: pointer;
         }
 
+        .logout-btn {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            padding: 12px 20px;
+            background: #4d4b4b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #000000;
+        }
+
         .container {
             width: 350px;
             background: rgba(255, 255, 255, 0.9);
@@ -97,34 +114,19 @@
             border-radius: 8px;
         }
 
-        .logout-btn {
+        .tracking-btn {
             padding: 12px 20px;
             background: #4d4b4b;
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
             font-weight: bold;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .logout-btn:hover {
+        .tracking-btn:hover {
             background: #000000;
-        }
-
-        .notification-btn {
-            padding: 12px 20px;
-            background: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.3s;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        .notification-btn:hover {
-            background: #218838;
         }
     </style>
 </head>
@@ -148,16 +150,15 @@
         🚍 KG-ROUTES Home
     </div>
 
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+
     <div class="container">
         <h2>Welcome, {{ username }}</h2>
         <p>You are logged in. Track your college bus below.</p>
         
         <div class="tracking-section">
-            <p>📍 <strong>Live Bus Location:</strong> Updating...</p>
+            <button class="tracking-btn">📍 <strong>Live Bus Location:</strong> Updating...</button>
         </div>
-
-        <button class="notification-btn" id="notifyBtn">Send SMS Notification</button>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </div>
 
     <script>
@@ -169,25 +170,6 @@
                 sidebar.style.width = "250px";
             }
         }
-
-        document.getElementById("notifyBtn").addEventListener("click", function() {
-            fetch("/send-notification", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert("Notification sent successfully! SID: " + data.message_sid);
-                } else {
-                    alert("Error: " + data.error);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Failed to send notification.");
-            });
-        });
     </script>
 
 </body>
